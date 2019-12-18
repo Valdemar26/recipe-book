@@ -1,0 +1,15 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{ recipeItem?.title }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image src="{{ recipeItem?.image }}" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{ recipeItem?.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" (click)="openRecipe(recipeItem?.id)">Open</button>
+    <button mat-raised-button color="accent" (click)="back()">Back</button>
+  </mat-card-actions>
+</mat-card>
