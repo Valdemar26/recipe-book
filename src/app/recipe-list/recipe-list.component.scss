@@ -1,0 +1,39 @@
+.recipe-wrapper {
+  padding: 10px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 20px;
+
+  .recipe-list {
+    margin: 0 auto;
+
+    .example-card {
+      max-width: 400px;
+
+      img {
+        min-width: 300px;
+        width: auto;
+        height: 326px;
+        background-size: cover;
+      }
+    }
+  }
+}
+
+.loading-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+
+  p {
+    text-align: center;
+  }
+
+  .loading {
+    max-width: 200px;
+    height: auto;
+  }
+}
