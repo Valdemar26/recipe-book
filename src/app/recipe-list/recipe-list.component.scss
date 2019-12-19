@@ -22,11 +22,33 @@
   }
 }
 
+.pagination {
+  width: 90%;
+  margin: 20px auto 20px;
+  height: 60px;
+  background-color: #2B2B2B;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+
+  .item {
+    background-color: #fff;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    margin-top: 20px;
+    //position: absolute;
+    //top: 20px;
+  }
+}
+
 .loading-wrapper {
   position: absolute;
-  top: 50%;
   left: 50%;
-  translate: -50% -50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   p {
     text-align: center;
