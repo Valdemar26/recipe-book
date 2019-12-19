@@ -214,7 +214,7 @@ export class RecipeBookService {
 
     const recipes = JSON.parse(JSON.stringify(this.recipes));
     this.pageList = new Array(Math.ceil(this.recipes.length / size)).fill(null).map(() => {
-      return recipes.splice(0, 4);
+      return recipes.splice(0, size);
     });
     this.paginationList.next(this.pageList.map((_, index) => index));
 
