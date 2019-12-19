@@ -1,4 +1,4 @@
-<div class="recipe-wrapper" *ngIf="recipes$ | async as recipes; else loading">
+<div class="recipe-wrapper" *ngIf="recipesPage$ | async as recipes; else loading">
   <div class="recipe-list"
        *ngFor="let recipe of recipes; let i = index">
 
@@ -22,8 +22,7 @@
 </div>
 
 <div class="pagination">
-  <div class="item">1</div>
-  <div class="item" *ngIf="recipes$ | async as recipes;">{{ recipes.length }}</div>
+  <div (click)="getPage(page)" class="item" *ngFor="let page of paginationList$ | async">{{ page + 1 }}</div>
 </div>
 
 <!--<mat-form-field>-->

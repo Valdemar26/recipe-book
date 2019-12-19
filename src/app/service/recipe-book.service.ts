@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import {BehaviorSubject, Observable, of} from 'rxjs';
+import {delay, map, skipWhile} from 'rxjs/operators';
+import {Recipe} from '../interface/recipe.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -177,19 +178,50 @@ export class RecipeBookService {
     }
   ];
 
-  constructor() { }
+  // public getRecipeListPage(pageIndex: number): Observable<any> {
+  //   return of(this.recipes.slice(pageIndex, 4)).pipe(
+  //     delay(700)
+  //   );
+  // }
+  //
+  // public getPagesList() {
+  //
+  // }
+  //
+  // getRecipeById(id: number) {
+  //   return of(this.recipes).pipe(
+  //     map((res: any) => {
+  //       return res.filter(item => item.id === id);
+  //     })
+  //   );
+  // }
 
-  public getRecipeList(): Observable<any> {
-    return of(this.recipes).pipe(
-      delay(700)
-    );
+
+  paginationList$: Observable<number[]>;
+  page$: Observable<any[]>;
+
+  pageList: [][];
+
+  private paginationList: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(null);
+  private page: BehaviorSubject<any[]> = new BehaviorSubject<any[]>(null);
+
+  constructor() {
+    this.page$ = this.page.asObservable().pipe(skipWhile((page) => !page));
+    this.paginationList$ = this.paginationList.asObservable().pipe(skipWhile((list) => !list));
   }
 
-  getRecipeById(id: number) {
-    return of(this.recipes).pipe(
-      map((res: any) => {
-        return res.filter(item => item.id === id);
-      })
-    );
+  setPage(size: number = 4): void {
+
+    const recipes = JSON.parse(JSON.stringify(this.recipes));
+    this.pageList = new Array(Math.ceil(this.recipes.length / size)).fill(null).map(() => {
+      return recipes.splice(0, 4);
+    });
+    this.paginationList.next(this.pageList.map((_, index) => index));
+
+    this.getPage();
+  }
+
+  getPage(pageIndex: number = 0): void {
+    this.page.next(this.pageList[pageIndex]);
   }
 }

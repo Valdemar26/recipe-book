@@ -13,11 +13,8 @@ import { Recipe } from '../interface/recipe.interface';
   styleUrls: ['./recipe-list.component.scss']
 })
 export class RecipeListComponent implements OnInit {
-  recipes$: Observable<Recipe[]>;
-  length = 10;
-  pageSize = 2;
-  pageSizeOptions: number[] = [1, 2, 4, 5];
-  pageEvent: PageEvent;
+  recipesPage$: Observable<Recipe[]>;
+  paginationList$: Observable<number[]>;
 
   constructor(private recipeBookService: RecipeBookService, private router: Router) { }
 
@@ -26,8 +23,9 @@ export class RecipeListComponent implements OnInit {
   }
 
   getRecipeList() {
-    this.recipes$ = this.recipeBookService.getRecipeList();
-    console.log(this.recipes$);
+    this.recipeBookService.setPage();
+    this.recipesPage$ = this.recipeBookService.page$;
+    this.paginationList$ = this.recipeBookService.paginationList$;
   }
 
   openRecipe(id) {
@@ -35,7 +33,7 @@ export class RecipeListComponent implements OnInit {
     console.log(id);
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  getPage(page: number) {
+    this.recipeBookService.getPage(page);
   }
 }
