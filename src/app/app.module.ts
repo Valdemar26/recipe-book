@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +32,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
     MatPaginatorModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatSelectModule
   ],
   exports: [],
   providers: [],

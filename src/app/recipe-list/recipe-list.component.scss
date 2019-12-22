@@ -1,47 +1,98 @@
-.recipe-wrapper {
-  padding: 10px;
-  margin: 0 auto;
+@import "../../assets/styles/_variables";
+
+.wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 20px;
+  height: calc(100% - 30px);
+  width: 100%;
+  grid-template-rows: 70px calc(100% - 170px) 100px;
+  grid-template-columns: auto;
+  grid-row-gap: 15px;
 
-  .recipe-list {
+  .title-wrapper {
+    text-align: center;
+
+    h1 {
+      color: $grey;
+    }
+  }
+
+  .recipe-wrapper {
+    height: 100%;
+    width: 90%;
+    overflow: auto;
+    padding: 10px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 20px;
 
-    .example-card {
-      max-width: 400px;
+    .recipe-list {
+      margin: 0 auto;
 
-      img {
-        min-width: 300px;
-        width: auto;
-        height: 326px;
-        background-size: cover;
+      .example-card {
+        max-width: 400px;
+
+        img {
+          min-width: 300px;
+          height: 326px;
+          background-size: cover;
+          cursor: pointer;
+        }
       }
     }
   }
-}
 
-.pagination {
-  width: 90%;
-  margin: 20px auto 20px;
-  height: 60px;
-  background-color: #2B2B2B;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-around;
-  position: relative;
+  .pagination {
+    display: flex;
+    width: 90%;
+    margin: 20px auto 20px;
+    height: 60px;
+    background-color: $grey;
+    border-radius: 5px;
 
-  .item {
-    background-color: #fff;
-    text-align: center;
-    width: 20px;
-    height: 20px;
-    border-radius: 2px;
-    margin-top: 20px;
-    //position: absolute;
-    //top: 20px;
+    mat-form-field {
+      width: 150px;
+      padding-left: 10px;
+
+      .mat-form-field-appearance-legacy {
+
+        .mat-form-field-underline {
+          background-color: $white;
+        }
+      }
+
+    }
+
+    .page-wrapper {
+      display: flex;
+      justify-content: space-around;
+      position: relative;
+      width: 100%;
+
+      .item {
+        background-color: $white;
+        text-align: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 2px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color $transition;
+
+        &:hover {
+          background-color: $light-grey;
+        }
+
+        &.active {
+          background-color: $light-red;
+          color: $white;
+        }
+      }
+    }
+
   }
+
 }
 
 .loading-wrapper {
@@ -58,4 +109,15 @@
     max-width: 200px;
     height: auto;
   }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: $light;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: $silver;
 }

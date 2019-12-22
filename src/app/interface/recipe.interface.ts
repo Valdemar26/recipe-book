@@ -1,10 +1,7 @@
-export interface Recipe {
+export interface RecipeInterface {
   title: string;
   image: string;
   id: number;
+  longDescription: string;
   description: string;
-
-  // email: string;
-  // password: string;
-  // returnSecureToken?: boolean;
 }

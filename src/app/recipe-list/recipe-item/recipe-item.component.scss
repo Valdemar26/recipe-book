@@ -1,0 +1,19 @@
+.mat-card {
+  padding: 30px;
+
+  &:not([class*=mat-elevation-z]) {
+    box-shadow: none;
+  }
+}
+
+.recipe-card {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 50px;
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+}

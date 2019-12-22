@@ -1,41 +1,53 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
-import { PageEvent } from '@angular/material/paginator';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 import { RecipeBookService } from '../service/recipe-book.service';
-import { Recipe } from '../interface/recipe.interface';
+import { RecipeInterface } from '../interface/recipe.interface';
+import { RecipePerPageInterface } from '../interface/recipe-per-page.interface';
 
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
-  styleUrls: ['./recipe-list.component.scss']
+  styleUrls: ['./recipe-list.component.scss'],
 })
 export class RecipeListComponent implements OnInit {
-  recipes$: Observable<Recipe[]>;
-  length = 10;
-  pageSize = 2;
-  pageSizeOptions: number[] = [1, 2, 4, 5];
-  pageEvent: PageEvent;
+  recipesPage$: Observable<RecipeInterface[]>;
+  paginationList$: Observable<number[]>;
+  selectedPage = 0;
+  animationState = false;
+
+  recipesPerPage: RecipePerPageInterface[] = [
+    { value: '2' },
+    { value: '4' },
+    { value: '8' }
+  ];
 
   constructor(private recipeBookService: RecipeBookService, private router: Router) { }
 
   ngOnInit() {
     this.getRecipeList();
+    this.animationState = true;
+  }
+
+  getRecipesPerPage(event) {
+    this.recipeBookService.setPage(event.value);
   }
 
   getRecipeList() {
-    this.recipes$ = this.recipeBookService.getRecipeList();
-    console.log(this.recipes$);
+    this.recipeBookService.setPage();
+    this.recipesPage$ = this.recipeBookService.page$;
+    this.paginationList$ = this.recipeBookService.paginationList$;
   }
 
   openRecipe(id) {
     this.router.navigate([`/recipe-list/${id}`]);
-    console.log(id);
   }
 
-  setPageSizeOptions(setPageSizeOptionsInput: string) {
-    this.pageSizeOptions = setPageSizeOptionsInput.split(',').map(str => +str);
+  getPage(page: number, index) {
+    this.recipeBookService.getPage(page);
+    this.selectedPage = index;
   }
 }

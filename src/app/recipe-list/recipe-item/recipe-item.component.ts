@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Recipe } from '../../interface/recipe.interface';
+import { RecipeInterface } from '../../interface/recipe.interface';
 import { first, switchMap } from 'rxjs/operators';
 import { RecipeBookService } from '../../service/recipe-book.service';
 import { Subscription } from 'rxjs';
@@ -12,10 +12,14 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./recipe-item.component.scss']
 })
 export class RecipeItemComponent implements OnInit, OnDestroy {
-  recipeItem: Recipe;
+  recipeItem: RecipeInterface;
   subscription: Subscription = new Subscription();
 
-  constructor(private router: Router, private route: ActivatedRoute, private recipeBook: RecipeBookService) { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private recipeBook: RecipeBookService
+  ) { }
 
   ngOnInit() {
 
@@ -27,8 +31,6 @@ export class RecipeItemComponent implements OnInit, OnDestroy {
     ).subscribe(recipe => this.recipeItem = recipe[0]);
 
     this.subscription.add(recipeItem$);
-
-    console.log('open', this.recipeItem);
   }
 
   ngOnDestroy(): void {

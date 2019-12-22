@@ -1,47 +1,53 @@
-<div class="recipe-wrapper" *ngIf="recipes$ | async as recipes; else loading">
-  <div class="recipe-list"
-       *ngFor="let recipe of recipes; let i = index">
+<div class="wrapper" *ngIf="recipesPage$ | async as recipes; else loading">
 
-    <mat-card class="example-card">
-      <mat-card-header>
-        <mat-card-title>{{ recipe?.title }}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{ recipe?.image }}" alt="Photo of a Shiba Inu">
-      <mat-card-content>
-        <p>
-          {{ recipe?.description }}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" (click)="openRecipe(recipe.id)">Open</button>
-      </mat-card-actions>
-    </mat-card>
-
-<!--    <app-recipe-item [recipeItem]="recipe"></app-recipe-item>-->
+  <div class="title-wrapper">
+    <h1>Recipe Book</h1>
   </div>
+
+  <div class="recipe-wrapper">
+    <div class="recipe-list"
+         *ngFor="let recipe of recipes; let i = index">
+
+      <mat-card class="example-card">
+        <mat-card-header>
+          <mat-card-title>{{ recipe?.title }}</mat-card-title>
+        </mat-card-header>
+        <img mat-card-image src="{{ recipe?.image }}" alt="recipe" (click)="openRecipe(recipe.id)">
+        <mat-card-content>
+          <p>
+            {{ recipe?.description }}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="openRecipe(recipe.id)">Open</button>
+        </mat-card-actions>
+      </mat-card>
+
+    </div>
+  </div>
+
+  <div class="pagination">
+
+    <mat-form-field>
+      <mat-label>Recipes per page</mat-label>
+      <mat-select (selectionChange)="getRecipesPerPage($event)">
+        <mat-option *ngFor="let perPage of recipesPerPage" [value]="perPage.value">
+          {{ perPage.value }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="page-wrapper">
+      <div (click)="getPage(page, i)"
+           class="item"
+           [class.active]="selectedPage === i"
+           *ngFor="let page of paginationList$ | async; let i = index">
+        {{ page + 1 }}
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<div class="pagination">
-  <div class="item">1</div>
-  <div class="item" *ngIf="recipes$ | async as recipes;">{{ recipes.length }}</div>
-</div>
-
-<!--<mat-form-field>-->
-<!--  Page size:-->
-<!--  <input matInput [(ngModel)]="pageSize">-->
-<!--</mat-form-field>-->
-<!--<mat-form-field>-->
-<!--  Page size options:-->
-<!--  <input matInput-->
-<!--         [ngModel]="pageSizeOptions"-->
-<!--         (ngModelChange)="setPageSizeOptions($event)">-->
-<!--</mat-form-field>-->
-
-<!--<mat-paginator [length]="length"-->
-<!--               [pageSize]="pageSize"-->
-<!--               [pageSizeOptions]="pageSizeOptions"-->
-<!--               (page)="pageEvent = $event">-->
-<!--</mat-paginator>-->
 
 <ng-template #loading>
   <div class="loading-wrapper">
