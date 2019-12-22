@@ -1,7 +1,7 @@
 <div class="wrapper" *ngIf="recipesPage$ | async as recipes; else loading">
 
   <div class="title-wrapper">
-    <h1>Title</h1>
+    <h1>Recipe Book</h1>
   </div>
 
   <div class="recipe-wrapper">
@@ -37,11 +37,13 @@
       </mat-select>
     </mat-form-field>
 
-    <div (click)="getPage(page, i)"
-         class="item"
-         [class.active]="selectedPage === i"
-         *ngFor="let page of paginationList$ | async; let i = index">
-      {{ page + 1 }}
+    <div class="page-wrapper">
+      <div (click)="getPage(page, i)"
+           class="item"
+           [class.active]="selectedPage === i"
+           *ngFor="let page of paginationList$ | async; let i = index">
+        {{ page + 1 }}
+      </div>
     </div>
   </div>
 

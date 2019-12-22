@@ -1,4 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import "./assets/styles/_variables";
+
+@font-face {
+  font-family: Ubuntu;
+  src: url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap') format("opentype");
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: Ubuntu, Roboto, "Helvetica Neue", sans-serif; }
+
+
+.mat-form-field-appearance-legacy {
+  .mat-form-field-underline {
+    background-color: $white;
+  }
+}
+
+.mat-form-field.mat-focused  {
+  .mat-form-field-ripple {
+    background-color: $white;
+  }
+}
+
+.mat-select-value {
+  color: $white;
+}
+
+.mat-form-field-appearance-legacy {
+  .mat-form-field-label {
+    color: $white;
+  }
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: $white;
+}
+
+.mat-select-arrow {
+  color: $white;
+}
+
+.mat-form-field.mat-focused.mat-primary {
+  .mat-select-arrow {
+    color: $white;
+  }
+}
